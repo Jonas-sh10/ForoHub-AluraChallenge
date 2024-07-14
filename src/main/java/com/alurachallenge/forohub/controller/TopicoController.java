@@ -1,6 +1,7 @@
 package com.alurachallenge.forohub.controller;
 
 import com.alurachallenge.forohub.domain.topico.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
     @Autowired
     private TopicoService topicoService;
@@ -27,7 +29,7 @@ public class TopicoController {
 
     @GetMapping
     @Transactional
-    public ResponseEntity<Page<DatosListaTopico>> listarTopicos(@PageableDefault(size = 10, sort = "fecha_creacion") Pageable paginacion) {
+    public ResponseEntity<Page<DatosListaTopico>> listarTopicos(@PageableDefault(size = 10, sort = "fechaCreacion") Pageable paginacion) {
         Page<DatosListaTopico> response = topicoService.getAllTopico(paginacion);
         return ResponseEntity.ok(response);
     }

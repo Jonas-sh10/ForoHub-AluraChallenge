@@ -57,7 +57,7 @@ public class TopicoService {
     }
 
     public Page<DatosListaTopico> getTopicoPorCursoYAnio(String nombreCurso, String anio, Pageable paginacion) {
-        System.out.println("Nombre del curso recibido: " + nombreCurso + anio);
+        System.out.println("Nombre del curso recibido: " + nombreCurso + " y " + anio);
         var cursoBuscado = cursoRepository.findByNombre(nombreCurso);
 
         if (cursoBuscado == null) {
@@ -75,6 +75,10 @@ public class TopicoService {
         }
 
         var topicos = topicoRepository.findByCursoAndFechaCreacionBetween(cursoBuscado, inicioDelAnio, finDelAnio, paginacion);
+
+        if (topicos.isEmpty()) {
+            throw new ValidacionDeIntegridad("No se encontraron tópicos para el curso y año especificado");
+        }
 
         var datosListaTopico = topicos.getContent().stream()
                 .map(DatosListaTopico::new)
