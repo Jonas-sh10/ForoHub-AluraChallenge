@@ -1,6 +1,8 @@
 package com.alurachallenge.forohub.controller;
 
 import com.alurachallenge.forohub.domain.topico.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -10,6 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 
 @RestController
@@ -21,15 +26,19 @@ public class TopicoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DatosRespuestaTopico> registrarTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico) {
+    public ResponseEntity<DatosRespuestaTopico> registrarTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico, UriComponentsBuilder uriComponentsBuilder) {
         DatosRespuestaTopico response = topicoService.crearTopico(datosRegistroTopico);
-
-        return ResponseEntity.ok(response);
+        URI url =uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(response.id()).toUri();
+        return ResponseEntity.created(url).body(response);
     }
 
     @GetMapping
     @Transactional
-    public ResponseEntity<Page<DatosListaTopico>> listarTopicos(@PageableDefault(size = 10, sort = "fechaCreacion") Pageable paginacion) {
+    @Operation(summary = "Listar tópicos",
+            parameters = {
+                    @Parameter(name = "size", hidden = true)
+            })
+    public ResponseEntity<Page<DatosListaTopico>> listarTopicos(@Parameter(hidden = true) @PageableDefault(size = 10, sort = "fechaCreacion") Pageable paginacion) {
         Page<DatosListaTopico> response = topicoService.getAllTopico(paginacion);
         return ResponseEntity.ok(response);
     }

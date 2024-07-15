@@ -28,24 +28,24 @@ public class TokenService {
                     .withExpiresAt(generarFechaExpiracion())
                     .sign(algorithm);
         }catch (JWTCreationException e) {
-            throw new RuntimeException();
+            throw new RuntimeException("Error creando el token JWT", e);
         }
     }
 
     public String getSubject(String token) {
         if (token == null) {
-            throw new RuntimeException();
+            throw new RuntimeException("Token no puede ser nulo");
         }
         DecodedJWT verifier = null;
         try {
-            Algorithm algorithm = Algorithm.HMAC256(apiSecret); // validando firma
+            Algorithm algorithm = Algorithm.HMAC256(apiSecret);
             verifier = JWT.require(algorithm)
                     .withIssuer("forohub")
                     .build()
                     .verify(token);
             verifier.getSubject();
         } catch (JWTVerificationException exception) {
-            System.out.println(exception.toString());
+            throw new RuntimeException("Error al verificar token", exception);
         }
         if (verifier.getSubject() == null) {
             throw new RuntimeException("Verifier invalido");

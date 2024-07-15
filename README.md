@@ -26,7 +26,7 @@ ___
 ---
 ## <span id="descripción-del-proyecto">Descripción del proyecto</span>
 <p align="justify">
-ForoHub es un sistema de gestión de foros diseñado para facilitar la interacción entre estudiantes, profesores y moderadores de Alura Latam. Permite a los usuarios crear, leer, actualizar y eliminar tópicos de discusión, y ofrece un entorno seguro y eficiente para la colaboración y el aprendizaje.
+ForoHub es un sistema de gestión de foros diseñado para facilitar la interacción entre estudiantes, profesores y administradores de Alura Latam. Permite a los usuarios crear, leer, actualizar y eliminar tópicos de discusión, y ofrece un entorno seguro y eficiente para la colaboración y el aprendizaje.
 </p>
 
 ---
@@ -36,15 +36,16 @@ ForoHub es un sistema de gestión de foros diseñado para facilitar la interacci
 </p>
 <p align="justify">
     <span style="color:#32CD32;"><strong>2. Mostrar todos los tópicos creados:</strong></span> Lista todos los tópicos disponibles en el foro.<br>
+
+- `Busca todos los topicos`<br>
+- `Busca topico por curso y año`<br>
+- `Busca topico por id`<br>
 </p>
 <p align="justify">
-    <span style="color:#FF6347;"><strong>3. Mostrar un tópico específico:</strong></span> Muestra los detalles de un tópico específico utilizando su ID.<br>
+    <span style="color:#8A2BE2;"><strong>3. Actualizar un tópico:</strong></span> Permite a los usuarios actualizar la información de un tópico existente.<br>
 </p>
 <p align="justify">
-    <span style="color:#8A2BE2;"><strong>4. Actualizar un tópico:</strong></span> Permite a los usuarios actualizar la información de un tópico existente.<br>
-</p>
-<p align="justify">
-    <span style="color:#FFA500;"><strong>5. Eliminar un tópico:</strong></span> Permite a los usuarios eliminar un tópico del foro.<br>
+    <span style="color:#FFA500;"><strong>4. Eliminar un tópico:</strong></span> Permite a los usuarios eliminar un tópico del foro.<br>
 </p>
 
 ---
@@ -54,6 +55,7 @@ ForoHub es un sistema de gestión de foros diseñado para facilitar la interacci
 
 - `Spring Security`<br>
 - `JWT.IO`<br>
+- `SpringDoc OpenAPI`<br>
 </p>
 <p align="justify">
     <span style="color:#32CD32;"><strong>2. Configuración de Seguridad:</strong></span> La configuración de seguridad se realiza en la clase `SecurityConfigurations` que define las políticas de acceso y la protección de las rutas de la API.<br>
@@ -101,20 +103,25 @@ ForoHub es un sistema de gestión de foros diseñado para facilitar la interacci
 ### Dependencias del proyecto
 <p align="justify">
 
-- **Spring Web**: Para construir la API REST.
-- **Spring Data JPA**: Para la integración con la capa de persistencia.
-- **MySQL Driver**: Para la conexión con la base de datos MySQL.
-- **Lombok**: Para reducir el código boilerplate.
-- **Spring Boot DevTools**: Para mejorar el ciclo de desarrollo.
-- **Flyway Migration**: Para la gestión de migraciones de la base de datos.
-- **Validation**: Para la validación de datos.
-- **Spring Security**: Para la autenticación y autorización.
-</p>
+- <span style="color:#1E90FF;"><strong>Spring Web</strong></span>: Para construir la API REST.<br>
+- <span style="color:#32CD32;"><strong>Spring Data JPA</strong></span>: Para la integración con la capa de persistencia.<br>
+- <span style="color:#FF6347;"><strong>MySQL Driver</strong></span>: Para la conexión con la base de datos MySQL.<br>
+- <span style="color:#8A2BE2;"><strong>Lombok</strong></span>: Para reducir el código boilerplate.<br>
+- <span style="color:#FFA500;"><strong>Spring Boot DevTools</strong></span>: Para mejorar el ciclo de desarrollo.<br>
+- <span style="color:#00BFFF;"><strong>Flyway Migration</strong></span>: Para la gestión de migraciones de la base de datos.<br>
+- <span style="color:#FF1493;"><strong>Validation</strong></span>: Para la validación de datos.<br>
+- <span style="color:#9370DB;"><strong>Spring Security</strong></span>: Para la autenticación y autorización.<br>
+- <span style="color:#32CD32;"><strong>SpringDoc OpenAPI</strong></span>: Para la generación automática de documentación OpenAPI.<br> Enlace para poder usarlo en un navegador web previamente levantado la aplicacion:
+   ```springdoc
+   http://localhost:8080/swagger-ui.html
+   ```
+  </p>
+
 
 ### Configuración de la base de datos
 <p align="justify">
 
-Para configurar la conexión a la base de datos MySQL, añade las siguientes propiedades a tu archivo `application.properties` en tu proyecto Spring Boot:
+Para configurar la conexión a la base de datos MySQL, añade las siguientes propiedades<strong>(localhost, nombre de la base de datos, usuario y la contraseña)</strong> a tu archivo `application.properties` en tu proyecto Spring Boot:
 </p>
 
 ```properties
